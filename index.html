@@ -1,0 +1,35 @@
+<html>
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+<script type="text/javascript" src="js/data.js" ></script>
+<script type="text/javascript" src="js/tree.js"></script>
+<script type="text/javascript" src="js/treeFunctions.js"></script>
+
+</head>
+<body>
+<div id="tree-container"></div>
+
+<input type="button" value="asdf" onClick="login(sessionData.session1, 1);"/>
+<input type="button" value="asdf" onClick="addGallery(sessionData.session1, 1, 0);"/>
+<input type="button" value="asdf" onClick="addImage(sessionData.session1, 1, 0, 0);"/>
+
+<script>
+    $(function(){
+    	createGraph();
+	    buildTree("#tree-container");
+
+		// addUser(0);
+		// addGallery(0, 0);
+		// addGallery(0, 1);
+		// addImage(0, 0, 0);
+		// addImage(0, 0, 1);
+		// addImage(0, 0, 2);
+    });
+</script>
+</body>
+</html>

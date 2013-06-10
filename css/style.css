@@ -1,0 +1,51 @@
+	body {
+		background-color: #494949;
+	}
+
+    g.node {
+         font-family: Verdana, Helvetica; 
+        /* font-family: 'Droid Sans'; */
+        font-size: 20px;
+        font-weight: bold;
+        fill: #232323;
+    }
+
+    rect.node-platform {
+        fill: #1d72aa;
+        stroke: #232323;
+        stroke-width: 1px;
+    }
+
+    rect.node-user {
+        fill: #c44440;
+        stroke: #232323;
+        stroke-width: 1px;
+    }
+
+    rect.node-gallery {
+        fill: #8cbb4e;
+        stroke: #232323;
+        stroke-width: 1px;
+    }
+
+    rect.node-image {
+        fill: #232323;
+        stroke: #232323;
+        stroke-width: 1px;
+    }
+
+    path.link {
+        fill: none;
+        stroke: gray;
+        stroke-width: 2px;
+    }
+
+    #tree-container {
+    	position: absolute;
+    	right: 10px;
+    	top: 10px;
+    	width: 800px;
+    	height: 500px;
+    	background-color: #494949;
+    	border: 1px solid #232323;
+    }

@@ -6,76 +6,124 @@
 
 body
 {
-background-repeat:no-repeat;
-background-position: center;
-background-attachment: fixed;
-background-color: #ffffff;
+	background-repeat:no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	background-color: #ffffff;
 }
 
 input[type="text"] {
-border: 2px solid #000000;
-background: #ffffff;
-color:#000000;
+	border: 2px solid #000000;
+	background: #ffffff;
+	color:#000000;
 }
 
 input[type="password"] {
-border: 2px solid #000000;
-background: #ffffff;
-color:#000000;
+	border: 2px solid #000000;
+	background: #ffffff;
+	color:#000000;
 }
 
 input[type="submit"] {
-border: none;
-background: transparent;
-color:#000000;
-font-size:16px;
+	border: none;
+	background: transparent;
+	color:#000000;
+	font-size:16px;
 }
 
 input[type="submit"]:hover {
-border: thin #999999 outset;
-background: #FFFFFF;
-color: #000000;
+	border: thin #999999 outset;
+	background: #FFFFFF;
+	color: #000000;
 }
 input[type="submit"]:focus  {
-border: thin #000000 solid;
-background: #FFFFFF;
-color: #000000;
+	border: thin #000000 solid;
+	background: #FFFFFF;
+	color: #000000;
 }
 input[type="submit"]:focus:hover {
-border: thin #000000 solid;
-background: #FFFFFF;
-color: #000000;
+	border: thin #000000 solid;
+	background: #FFFFFF;
+	color: #000000;
 }
 
 #box
 {
-position: absolute;
-width: 50%;
-height: 30%;
-left: 42%;
-top: 65%;
+	position: absolute;
+	width: 50%;
+	height: 30%;
+	left: 42%;
+	top: 65%;
 }
 
+#gallery {
+	padding: 2em 0;
+	margin: 0 auto;
+	width: 600px;
+	font: small Verdana, sans-serif;
+}
+
+#gallery h2 {
+	margin: 0;
+	border-bottom: 1px solid #666;
+}
 
 #text
 {
-font-family:arial;
-color:black;
-font-size:16px;
+	font-family:arial;
+	color:black;
+	font-size:16px;
 }
 
+div.heading{
+	font-family:Verdana, Helvetica;
+	color:black;
+	font-size:32px;
+	align:center
+}
+
+div.img
+  {
+  margin: 20px 2px 0 0;
+
+  border:1px solid #000000;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+  }
+div.img img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #000000;
+  }
+div.img a:hover img
+  {
+  border:1px solid #000000;
+  }
+div.desc
+  {
+  text-align:center;
+  font-weight:normal;
+  width:120px;
+  margin:2px;
+  }
+</style>
 <script>
-    function toggleVisibility(newSection) {
-        $(".section").not("#" + newSection).hide();
-        $("#" + newSection).show();
-    }
+<!--
+    function toggle_visibility(id) {
+		var e = document.getElementById(id);
+		e.style.display = ((e.style.display!='none') ? 'none' : 'block');
+}
+ -->
 </script>
 
-</style>
+
 </head>
-<body>
+<body >
 <div id="box">
-<form method="POST" action="#">
+
 <table>
     <tr>
       <td align="right"><p id="text">Username:</p></td>
@@ -89,31 +137,38 @@ font-size:16px;
     </tr>
     <tr>
       <td align="right"></td>
-      <td align="left"><input type="submit" value="Log In"> < href="#" onclick="toggleVisibility('about');">About</td>
+      <td align="left"> <a href="#" onclick="toggle_visibility('gallery'); toggle_visibility('box');">Click here </a></href></td>
     </tr>
 </table>
-</form>
 </div> 
 
-<div id="gallery" style="visibility: hidden">
-<form method="POST" action="#">
-<table>
-    <tr>
-      <td align="right"><p id="text">Images:</p></td>
-      <td align="left">
-		
-	</td>
-    </tr>
-    <tr>
-      <td align="right"><p id="text">image 1</p></td>
-      <td align="left"><p id="text">image 2</p></td>
-    </tr>
-    <tr>
-      <td align="right"><p id="text">image 3</p></td>
-      <td align="left"><p id="text">image 4</p></td>
-    </tr>
-</table>
-</form>
+<div id="gallery" style="display:none">
+<h2>My Photo Gallery</h2>
+<div class="img">
+	<a href="#">
+		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
+	</a>
+  <div class="desc">Delete</div>
+</div>
+<div class="img">
+ 	<a href="#">
+		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
+	</a>
+	<div class="desc">Delete</div>
+</div>
+<div class="img">
+	<a href="#">
+		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
+	</a>
+  <div class="desc">Delete</div>
+</div>
+<div class="img">
+ 	<a href="#">
+		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
+	</a>
+	<div class="desc">Delete</div>
+</div>
+
 </div> 
 </body>
 

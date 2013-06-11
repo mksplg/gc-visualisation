@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <style type="text/css">
+
+body
+{
+background-repeat:no-repeat;
+background-position: center;
+background-attachment: fixed;
+background-color: #ffffff;
+}
+
+input[type="text"] {
+border: 2px solid #000000;
+background: #ffffff;
+color:#000000;
+}
+
+input[type="password"] {
+border: 2px solid #000000;
+background: #ffffff;
+color:#000000;
+}
+
+input[type="submit"] {
+border: none;
+background: transparent;
+color:#000000;
+font-size:16px;
+}
+
+input[type="submit"]:hover {
+border: thin #999999 outset;
+background: #FFFFFF;
+color: #000000;
+}
+input[type="submit"]:focus  {
+border: thin #000000 solid;
+background: #FFFFFF;
+color: #000000;
+}
+input[type="submit"]:focus:hover {
+border: thin #000000 solid;
+background: #FFFFFF;
+color: #000000;
+}
+
+#box
+{
+position: absolute;
+width: 50%;
+height: 30%;
+left: 42%;
+top: 65%;
+}
+
+
+#text
+{
+font-family:arial;
+color:black;
+font-size:16px;
+}
+
+<script>
+    function toggleVisibility(newSection) {
+        $(".section").not("#" + newSection).hide();
+        $("#" + newSection).show();
+    }
+</script>
+
+</style>
+</head>
+<body>
+<div id="box">
+<form method="POST" action="#">
+<table>
+    <tr>
+      <td align="right"><p id="text">Username:</p></td>
+      <td align="left">
+		<input type="text" name="j_username">
+	</td>
+    </tr>
+    <tr>
+      <td align="right"><p id="text">Password:</p></td>
+      <td align="left"><input type="password" name="j_password"></td>
+    </tr>
+    <tr>
+      <td align="right"></td>
+      <td align="left"><input type="submit" value="Log In"> < href="#" onclick="toggleVisibility('about');">About</td>
+    </tr>
+</table>
+</form>
+</div> 
+
+<div id="gallery" style="visibility: hidden">
+<form method="POST" action="#">
+<table>
+    <tr>
+      <td align="right"><p id="text">Images:</p></td>
+      <td align="left">
+		
+	</td>
+    </tr>
+    <tr>
+      <td align="right"><p id="text">image 1</p></td>
+      <td align="left"><p id="text">image 2</p></td>
+    </tr>
+    <tr>
+      <td align="right"><p id="text">image 3</p></td>
+      <td align="left"><p id="text">image 4</p></td>
+    </tr>
+</table>
+</form>
+</div> 
+</body>
+
+
+</body>

@@ -79,3 +79,139 @@
         stroke: #8cbb4e;
         stroke-width: 1px;
     }
+	
+#page
+{
+	background-repeat:no-repeat;
+	background-position: left;
+	background-attachment: fixed;
+	background-color: #F2F2F2;
+	position: absolute;
+	width: 400px;
+	height: 300px;
+	left: 5%;
+	top: 10%;
+}
+
+input[type="text"] {
+	border: 2px solid #000000;
+	background: #ffffff;
+	color:#000000;
+}
+
+input[type="password"] {
+	border: 2px solid #000000;
+	background: #ffffff;
+	color:#000000;
+}
+
+input[type="submit"] {
+	border: none;
+	background: transparent;
+	color:#000000;
+	font-size:16px;
+}
+
+input[type="submit"]:hover {
+	border: thin #999999 outset;
+	background: #FFFFFF;
+	color: #000000;
+}
+input[type="submit"]:focus  {
+	border: thin #000000 solid;
+	background: #FFFFFF;
+	color: #000000;
+}
+input[type="submit"]:focus:hover {
+	border: thin #000000 solid;
+	background: #FFFFFF;
+	color: #000000;
+}
+
+#box
+{
+	position: absolute;
+	width: 50%;
+	height: 30%;
+	left: 17%;
+	top: 30%;
+}
+
+#gallery {
+	padding: 2em 0;
+	margin: 0 auto;
+	width: 300px;
+	font: small Verdana, sans-serif;
+}
+
+#gallery table {
+	margin: 0;
+	border-bottom: 1px solid #666;
+}
+
+#gallery h2 {
+	color:black;
+	font-size:14px;
+}
+
+#gallery a {
+	color:black;
+	font-size:12px;
+}
+
+#box a {
+	font-family:arial;
+	color:black;
+	font-size:16px;
+}
+
+#text
+{
+	font-family:arial;
+	color:black;
+	font-size:16px;
+}
+
+div.heading{
+	font-family:Verdana, Helvetica;
+	color:black;
+	font-size:32px;
+	align:center
+}
+
+div.img
+  {
+  margin: 20px 2px 0 0;
+
+  border:1px solid #000000;
+  height:auto;
+  width:auto;
+  float:left;
+  text-align:center;
+  }
+div.img img
+  {
+  display:inline;
+  margin:3px;
+  border:1px solid #000000;
+  }
+div.img a:hover img
+  {
+  border:1px solid #000000;
+  }
+div.desc
+  {
+  text-align:center;
+  font-weight:normal;
+  width:70px;
+  margin:2px;
+  }
+  
+#upload {
+    width: 390px;
+    height: 50px;
+	display:block; position:absolute;
+	top:100px; left:110px; width:390px;
+	background-color: #F2F2F2;
+	border:1px solid black;
+}

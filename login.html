@@ -2,134 +2,10 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 	<title>Your Very Own Photo Gallery</title>
     <style type="text/css">
-
-body
-{
-	background-repeat:no-repeat;
-	background-position: center;
-	background-attachment: fixed;
-	background-color: #F2F2F2;
-}
-
-input[type="text"] {
-	border: 2px solid #000000;
-	background: #ffffff;
-	color:#000000;
-}
-
-input[type="password"] {
-	border: 2px solid #000000;
-	background: #ffffff;
-	color:#000000;
-}
-
-input[type="submit"] {
-	border: none;
-	background: transparent;
-	color:#000000;
-	font-size:16px;
-}
-
-input[type="submit"]:hover {
-	border: thin #999999 outset;
-	background: #FFFFFF;
-	color: #000000;
-}
-input[type="submit"]:focus  {
-	border: thin #000000 solid;
-	background: #FFFFFF;
-	color: #000000;
-}
-input[type="submit"]:focus:hover {
-	border: thin #000000 solid;
-	background: #FFFFFF;
-	color: #000000;
-}
-
-#box
-{
-	position: absolute;
-	width: 50%;
-	height: 30%;
-	left: 42%;
-	top: 40%;
-}
-
-#gallery {
-	padding: 2em 0;
-	margin: 0 auto;
-	width: 600px;
-	font: small Verdana, sans-serif;
-}
-
-#gallery table {
-	margin: 0;
-	border-bottom: 1px solid #666;
-}
-
-#gallery a {
-	color:black;
-	font-size:14px;
-}
-
-#box a {
-	font-family:arial;
-	color:black;
-	font-size:16px;
-}
-
-#text
-{
-	font-family:arial;
-	color:black;
-	font-size:16px;
-}
-
-div.heading{
-	font-family:Verdana, Helvetica;
-	color:black;
-	font-size:32px;
-	align:center
-}
-
-div.img
-  {
-  margin: 20px 2px 0 0;
-
-  border:1px solid #000000;
-  height:auto;
-  width:auto;
-  float:left;
-  text-align:center;
-  }
-div.img img
-  {
-  display:inline;
-  margin:3px;
-  border:1px solid #000000;
-  }
-div.img a:hover img
-  {
-  border:1px solid #000000;
-  }
-div.desc
-  {
-  text-align:center;
-  font-weight:normal;
-  width:120px;
-  margin:2px;
-  }
-  
-#upload {
-    width: 350px;
-    height: 50px;
-	display:block; position:absolute;
-	top:100px; left:500px; width:370px;
-	background-color: #ffffff;
-	border:1px solid black;
-}
 </style>
 <script>
 <!--
@@ -158,7 +34,7 @@ div.desc
     </tr>
     <tr>
       <td align="right"></td>
-      <td align="center"> <a href="#" onclick="toggle_visibility('gallery'); toggle_visibility('box');">Log In </a></href></td>
+      <td align="center"> <a id="button" class="button" href="#" onclick="toggle_visibility('gallery'); toggle_visibility('box');">Log In </a></href></td>
     </tr>
 </table>
 </div> 

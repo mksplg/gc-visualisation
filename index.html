@@ -18,6 +18,8 @@
 }
  -->
  </script>
+<script type="text/javascript" src="js/gc.js"></script>
+
 </head>
 <body>
 <div id="tree-container"></div>
@@ -27,6 +29,8 @@
 <input type="button" value="asdf" onClick="login(sessionData.session1, 1);"/>
 <input type="button" value="asdf" onClick="addGallery(sessionData.session1, 1, 0);"/>
 <input type="button" value="asdf" onClick="addImage(sessionData.session1, 1, 0, 0);"/>
+<input type="button" value="asdf" onClick="tenureGC();"/>
+<input type="button" value="asdf" onClick="fullGC();"/>
 
 <div id="page">
 <div id="box">
@@ -118,11 +122,13 @@
 </div>
 <script>
     $(function(){
-    	createGraph();
-	    buildTree("#tree-container");
+    	createTreeGraph();
+	    updateTreeGraph();
 
 		createMemGraph();
 		updateMemGraph();
+
+
 
 		// addUser(0);
 		// addGallery(0, 0);

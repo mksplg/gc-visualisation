@@ -17,10 +17,24 @@ var options = {
 var layoutRoot;
 var size;
 
+function visit(parent, visitFn, childrenFn) {
+    if (!parent) return;
+
+    visitFn(parent);
+
+    var children = childrenFn(parent);
+    if (children) {
+        var count = children.length;
+        for (var i = 0; i < count; i++) {
+            visit(children[i], visitFn, childrenFn);
+        }
+    }
+}
+
 
 
 /* Create initial graph structure */
-function createGraph() {
+function createTreeGraph() {
 	// Size of the diagram
     // var size = { width:$(containerName).outerWidth(), height: totalNodes * 80};
     size = { width:$("#tree-container").outerWidth(), height: $("#tree-container").outerHeight()};
@@ -49,23 +63,11 @@ function createGraph() {
 
 
 
-function visit(parent, visitFn, childrenFn) {
-    if (!parent) return;
 
-    visitFn(parent);
-
-    var children = childrenFn(parent);
-    if (children) {
-        var count = children.length;
-        for (var i = 0; i < count; i++) {
-            visit(children[i], visitFn, childrenFn);
-        }
-    }
-}
 
 
 /* Update build/update graph according to data */
-function buildTree(containerName, customOptions) {
+function updateTreeGraph() {
     
     // Calculate total nodes, max label length
     // var totalNodes = 0;

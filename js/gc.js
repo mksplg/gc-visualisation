@@ -1,6 +1,8 @@
 var gcData = {
 	source: memory.survivor2,
-	target: memory.survivor1
+	target: memory.survivor1,
+	markTimeout: 0,
+	copyTimeout: 0
 }
 
 var timeoutData = {
@@ -26,31 +28,71 @@ function visit(parent, visitFn, childrenFn) {
 }
 
 function tenureGC() {
+	gcData.markTimeout = 0;
+	gcData.copyTimeout = 0;
 	tenureGC_mark();
 }
 
 function tenureGC_mark() {
-	mark(treeData, memory);
-	setTimeout(function() {tenureGC_copyEden()}, 1000);
+	clearMarked(memory.eden);
+	clearMarked(memory.survivor1);
+	clearMarked(memory.survivor2);
+	clearMarked(memory.old);
+	
+	mark(treeData, true);
+}
+
+function clearMarked(data) {
+	for (var i = 0; i < data.length; i++) {
+    	data[i].treeObject.marked = false;
+	}
+}
+
+function mark(parent, root) {
+	if (!parent) return;
+
+	gcData.markTimeout += 1000;
+	setTimeout(function() {
+		parent.marked = true;
+		updateMemGraph();
+	}, gcData.markTimeout);
+
+	var children = (parent.contents && parent.contents.length > 0) ? parent.contents : null;
+	if (children) {
+		for(var i = 0; i < children.length; i++) {
+			mark(children[i], false);
+		}
+	}
+
+	if (root) {
+		gcData.markTimeout += 1000;
+		setTimeout(function() {
+			tenureGC_copyEden();
+		}, gcData.markTimeout);
+	}
 }
 
 function tenureGC_copyEden() {
-	copy(memory.eden, gcData.target, memory.old, 4);
-	setTimeout(function() {tenureGC_clearEden()}, 1000);
+	copy(memory.eden, gcData.target, memory.old, 4, function() {
+		tenureGC_clearEden();
+	});
 }
 
 function tenureGC_clearEden() {
 	clear(memory.eden);
+	updateMemGraph();
 	setTimeout(function() {tenureGC_copySurvivor()}, 1000);
 }
 
 function tenureGC_copySurvivor() {
-	copy(gcData.source, gcData.target, memory.old, 4);
-	setTimeout(function() {tenureGC_clearSurvivor()}, 1000);
+	copy(gcData.source, gcData.target, memory.old, 4, function() {
+		tenureGC_clearSurvivor();
+	});
 }
 
 function tenureGC_clearSurvivor() {
 	clear(gcData.source);
+	updateMemGraph();
 	setTimeout(function() {tenureGC_switch()}, 1000);
 }
 
@@ -58,6 +100,12 @@ function tenureGC_switch() {
 	var tmp = gcData.source;
 	gcData.source = gcData.target;
 	gcData.target = tmp;
+
+	clearMarked(memory.eden);
+	clearMarked(memory.survivor1);
+	clearMarked(memory.survivor2);
+	clearMarked(memory.old);
+	updateMemGraph();
 }
 
 function fullGC() {
@@ -71,63 +119,26 @@ function fullGC() {
 	memory.old = memory.tmp;
 }
 
-function mark(objectHierarchy, memoryAreas) {
-	clearMarked(memoryAreas.eden);
-	clearMarked(memoryAreas.survivor1);
-	clearMarked(memoryAreas.survivor2);
-	clearMarked(memoryAreas.old);
-
-	visit(objectHierarchy, function(d) {
-        d.marked = true;
-        updateMemGraph();
-    }, function(d) {
-        return (d.contents && d.contents.length > 0) ? d.contents : null;
-    });
-}
-
-function mark2(parent, root) {
-	if (!parent) return;
-
-	var children = (d.contents && d.contents.length > 0) ? parent.contents : null;
-	var accTimeout
-	if (children) {
-		for(var i = 0; i < children.length; i++) {
-
-		}
-	}
-
-	if (root) {
-
-	}
-}
-
-function clearMarked(data) {
-	for (var i = 0; i < data.length; i++) {
-    	data[i].treeObject.marked = false;
-	}
-}
-
-function copy(source, target, old, count) {
+function copy(source, target, old, count, continueFn) {
+	gcData.copyTimeout = 0;
 	for (var i = 0; i < source.length; i++) {
     	if (source[i].treeObject.marked) {
-    		source[i].treeObject.gcCount = (source[i].treeObject.gcCount) ? source[i].treeObject.gcCount + 1 : 1;
-    		if (source[i].treeObject.gcCount < count) {
-			    timeoutData.value += 1000;
-			    setTimeout(function() {
-			    	target.push(source[i]);
-			    	updateMemGraph();
-			    }, timeoutData.value);
-    		} else {
-    			setTimeout(function() {
-    				old.push(source[i]);
-    				updateMemGraph();
-    			}, timeoutData.value);
-    		}
-    		
-
-    		
+				gcData.copyTimeout += 1000;
+				(function(index) {
+					setTimeout(function() {
+    					source[index].treeObject.gcCount = (source[index].treeObject.gcCount) ? source[index].treeObject.gcCount + 1 : 1;
+    					if (source[index].treeObject.gcCount < count) {
+					    	target.push(source[index]);
+					    } else {
+							old.push(source[index]);
+					    }
+				    	updateMemGraph();
+				    }, gcData.copyTimeout);
+			    })(i);
     	}
 	}
+	gcData.copyTimeout += 1000;
+	setTimeout(continueFn, gcData.copyTimeout);
 }
 
 function clear(data) {

@@ -112,7 +112,9 @@ function updateMemArea(data, layoutData, clazz) {
 
 	// Update data
 	var nodes = memData.layoutRoot.selectAll("." + clazz)
-    	.data(data, function(d) { return d.id; });
+    	.data(data, function(d) {
+    		return d.id;
+    	});
 
 
     nodes.enter().append("svg:g")
@@ -153,10 +155,10 @@ function updateMemArea(data, layoutData, clazz) {
 
 			g.append("svg:image")
 			.attr("xlink:href", d.treeObject.name)
-			.attr("x", 3 - (options.imageWidth / 2))
-			.attr("y", 3 - (options.imageHeight / 2))
-			.attr("width", options.imageWidth - 6)
-			.attr("height", options.imageHeight - 6);
+			.attr("x", - (layoutData.boxWidth / 2))
+			.attr("y", - (layoutData.boxHeight / 2))
+			.attr("width", layoutData.boxWidth)
+			.attr("height", layoutData.boxHeight);
 	    }
 
 	    // Common
@@ -164,24 +166,38 @@ function updateMemArea(data, layoutData, clazz) {
 	  		return "node-" + d.treeObject.type;
 		});
 
-		if (d.marked) {
-			g.append("svg:text")
-    			.attr("text-anchor", "middle")
-     			.attr("dx", function(d) {
-        			return 0;
-				})
-     			.attr("dy", function(d) {
-        			return ".35em";
-				})
-     			.text(function(d) {
-         			return "OK";
-				});
-		}
+	    g.append("svg:circle")
+	    	.attr("class", "marked-marker")
+	    	.attr("cx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2 - layoutData.boxHeight + 4)
+	    	.attr("cy", 0)
+	    	.attr("r", layoutData.boxHeight / 2 - 4)
+			.attr("style", function(d) {
+				return d.treeObject.marked ? "" : "display: none";
+			});
+	    g.append("svg:text")
+	    	.attr("class", "marked-text")
+			.attr("text-anchor", "middle")
+ 			.attr("dx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2 - layoutData.boxHeight + 4)
+ 			.attr("dy", ".5em")
+ 			.text("*")
+ 			.attr("style", function(d) {
+				return d.treeObject.marked ? "" : "display: none";
+			});
+
+	    g.append("svg:circle")
+	    	.attr("class", "count-marker")
+	    	.attr("cx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2)
+	    	.attr("cy", 0)
+	    	.attr("r", layoutData.boxHeight / 2 - 4);
+	    g.append("svg:text")
+	    	.attr("class", "count-text")
+			.attr("text-anchor", "middle")
+ 			.attr("dx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2)
+ 			.attr("dy", ".35em");
 	});
 
     // Remove
     nodes.exit().remove();
-
 
     // Update all
     t.selectAll("." + clazz).attr("transform", function(d, i) {
@@ -189,4 +205,13 @@ function updateMemArea(data, layoutData, clazz) {
      		var y = layoutData.y + i * layoutData.boxHeight + layoutData.boxHeight / 2;
          	return "translate(" + x + "," + y + ")";
 	});
+
+    memData.layoutRoot.selectAll(".marked-marker, .marked-text").attr("style", function(d) {
+			return d.treeObject.marked ? "" : "display: none";
+		});
+
+    memData.layoutRoot.selectAll(".count-text")
+    	.text(function(d) {
+     		return d.treeObject.gcCount ? d.treeObject.gcCount : "0";
+		});
 }

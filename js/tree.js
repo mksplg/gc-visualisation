@@ -230,6 +230,20 @@ function updateTreeGraph() {
 	    g.select("rect").attr("class", function(d) {
 	  		return "node-" + d.type;
 		});
+
+        if (d.marked) {
+            g.append("svg:text")
+                .attr("text-anchor", "middle")
+                .attr("dx", function(d) {
+                    return options.boxWidth;
+                })
+                .attr("dy", function(d) {
+                    return ".35em";
+                })
+                .text(function(d) {
+                    return d.gcCount;
+                });
+        }
 	});
 
     // Remove

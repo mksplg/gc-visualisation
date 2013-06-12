@@ -1,84 +1,83 @@
-	body {
-		background-color: #494949;
-	}
+body {
+  background-color: #494949;
+}
 
-    g.node {
-         font-family: Verdana, Helvetica; 
-        /* font-family: 'Droid Sans'; */
-        font-size: 20px;
-        font-weight: bold;
-        fill: #232323;
-    }
+g.node {
+    font-family: Verdana, Helvetica; 
+    font-size: 20px;
+    font-weight: bold;
+    fill: #232323;
+}
 
-    rect.node-platform {
-        fill: #1d72aa;
-        stroke: #232323;
-        stroke-width: 1px;
-    }
+rect.node-platform {
+    fill: #1d72aa;
+    stroke: #232323;
+    stroke-width: 1px;
+}
 
-    rect.node-user {
-        fill: #c44440;
-        stroke: #232323;
-        stroke-width: 1px;
-    }
+rect.node-user {
+    fill: #c44440;
+    stroke: #232323;
+    stroke-width: 1px;
+}
 
-    rect.node-gallery {
-        fill: #8cbb4e;
-        stroke: #232323;
-        stroke-width: 1px;
-    }
+rect.node-gallery {
+    fill: #8cbb4e;
+    stroke: #232323;
+    stroke-width: 1px;
+}
 
-    rect.node-image {
-        fill: #232323;
-        stroke: #232323;
-        stroke-width: 1px;
-    }
+rect.node-image {
+    fill: #232323;
+    stroke: #232323;
+    stroke-width: 1px;
+}
 
-    path.link {
-        fill: none;
-        stroke: gray;
-        stroke-width: 2px;
-    }
+path.link {
+    fill: none;
+    stroke: gray;
+    stroke-width: 2px;
+}
 
-    #tree-container {
-    	position: absolute;
-    	right: 10px;
-    	top: 10px;
-    	width: 800px;
-    	height: 48%;
-    	background-color: #494949;
-    	border: 1px solid #232323;
-    }
+#tree-container {
+  	position: absolute;
+  	right: 10px;
+  	top: 10px;
+  	width: 800px;
+  	height: 48%;
+  	background-color: #494949;
+  	border: 1px solid #232323;
+}
 
-    #memory-container {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        width: 800px;
-        height: 48%;
-        background-color: #494949;
-        border: 1px solid #232323;
-    }
-
+#memory-container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 800px;
+    height: 48%;
+    background-color: #494949;
+    border: 1px solid #232323;
+}
 
 
-    .eden-area {
-        fill: none;
-        stroke: #c44440;
-        stroke-width: 1px;
-    }
 
-    .survivor-area {
-        fill: none;
-        stroke: #1d72aa;
-        stroke-width: 1px;
-    }
+.eden-area {
+    fill: none;
+    stroke: #c44440;
+    stroke-width: 1px;
+}
 
-    .old-area {
-        fill: none;
-        stroke: #8cbb4e;
-        stroke-width: 1px;
-    }
+.survivor-area {
+    fill: none;
+    stroke: #1d72aa;
+    stroke-width: 1px;
+}
+
+.old-area {
+    fill: none;
+    stroke: #8cbb4e;
+    stroke-width: 1px;
+}
 	
 #page
 {
@@ -216,10 +215,27 @@ div.desc
 	border:1px solid black;
 }
 
-    .eden-node {
-         font-family: Verdana, Helvetica; 
-        /* font-family: 'Droid Sans'; */
-        font-size: 20px;
-        font-weight: bold;
-        fill: #232323;
-    }
+.eden-node, .survivor1-node, .survivor2-node, .old-node {
+    font-family: Verdana, Helvetica; 
+    font-size: 14px;
+    font-weight: bold;
+    fill: #232323;
+}
+
+.marked-marker {
+    fill: #232323;
+    stroke: #232323;
+    stroke-width: 1px;
+}
+.marked-text {
+    fill: #FFFFFF;
+}
+
+.count-marker {
+    fill: #232323;
+    stroke: #232323;
+    stroke-width: 1px;
+}
+.count-text {
+    fill: #FFFFFF;
+}

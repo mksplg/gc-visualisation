@@ -9,10 +9,13 @@
 <script type="text/javascript" src="js/data.js" ></script>
 <script type="text/javascript" src="js/tree.js"></script>
 <script type="text/javascript" src="js/treeFunctions.js"></script>
+<script type="text/javascript" src="js/memory.js"></script>
 
 </head>
 <body>
 <div id="tree-container"></div>
+<div id="memory-container"></div>
+
 
 <input type="button" value="asdf" onClick="login(sessionData.session1, 1);"/>
 <input type="button" value="asdf" onClick="addGallery(sessionData.session1, 1, 0);"/>
@@ -22,6 +25,9 @@
     $(function(){
     	createGraph();
 	    buildTree("#tree-container");
+
+		createMemGraph();
+		updateMemGraph();
 
 		// addUser(0);
 		// addGallery(0, 0);

@@ -37,6 +37,14 @@ function createGraph() {
     treeData.parent = treeData;
     treeData.px = treeData.x;
     treeData.py = treeData.y;
+
+    /* Platform - Blue rectangle*/
+    layoutRoot.append("rect")
+        .attr("x", 0)
+        .attr("y", options.platformBorder)
+        .attr("width", options.platformWidth)
+        .attr("height", size.height - options.platformBorder * 2)
+        .attr("class", "node-platform");
 }
 
 
@@ -81,14 +89,6 @@ function buildTree(containerName, customOptions) {
     // Get nodes/links
     var nodes = tree.nodes(treeData);
     var links = tree.links(nodes);
-
-    /* Platform - Blue rectangle*/
-  	layoutRoot.append("rect")
-  		.attr("x", 0)
-		.attr("y", options.platformBorder)
-		.attr("width", options.platformWidth)
-		.attr("height", size.height - options.platformBorder * 2)
-		.attr("class", "node-platform");
 
 	// Transition object 
 	var t = layoutRoot.transition()

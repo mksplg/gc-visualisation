@@ -45,7 +45,37 @@
     	right: 10px;
     	top: 10px;
     	width: 800px;
-    	height: 500px;
+    	height: 48%;
     	background-color: #494949;
     	border: 1px solid #232323;
+    }
+
+    #memory-container {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: 800px;
+        height: 48%;
+        background-color: #494949;
+        border: 1px solid #232323;
+    }
+
+
+
+    .eden-area {
+        fill: none;
+        stroke: #c44440;
+        stroke-width: 1px;
+    }
+
+    .survivor-area {
+        fill: none;
+        stroke: #1d72aa;
+        stroke-width: 1px;
+    }
+
+    .old-area {
+        fill: none;
+        stroke: #8cbb4e;
+        stroke-width: 1px;
     }

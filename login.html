@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>Your Very Own Photo Gallery</title>
     <style type="text/css">
 
 body
@@ -9,7 +10,7 @@ body
 	background-repeat:no-repeat;
 	background-position: center;
 	background-attachment: fixed;
-	background-color: #ffffff;
+	background-color: #F2F2F2;
 }
 
 input[type="text"] {
@@ -53,7 +54,7 @@ input[type="submit"]:focus:hover {
 	width: 50%;
 	height: 30%;
 	left: 42%;
-	top: 65%;
+	top: 40%;
 }
 
 #gallery {
@@ -63,9 +64,20 @@ input[type="submit"]:focus:hover {
 	font: small Verdana, sans-serif;
 }
 
-#gallery h2 {
+#gallery table {
 	margin: 0;
 	border-bottom: 1px solid #666;
+}
+
+#gallery a {
+	color:black;
+	font-size:14px;
+}
+
+#box a {
+	font-family:arial;
+	color:black;
+	font-size:16px;
 }
 
 #text
@@ -109,6 +121,15 @@ div.desc
   width:120px;
   margin:2px;
   }
+  
+#upload {
+    width: 350px;
+    height: 50px;
+	display:block; position:absolute;
+	top:100px; left:500px; width:370px;
+	background-color: #ffffff;
+	border:1px solid black;
+}
 </style>
 <script>
 <!--
@@ -128,45 +149,76 @@ div.desc
     <tr>
       <td align="right"><p id="text">Username:</p></td>
       <td align="left">
-		<input type="text" name="j_username">
+		<input type="text" name="j_username" value="Frank">
 	</td>
     </tr>
     <tr>
       <td align="right"><p id="text">Password:</p></td>
-      <td align="left"><input type="password" name="j_password"></td>
+      <td align="left"><input type="password" name="j_password" value="*******"></td>
     </tr>
     <tr>
       <td align="right"></td>
-      <td align="left"> <a href="#" onclick="toggle_visibility('gallery'); toggle_visibility('box');">Click here </a></href></td>
+      <td align="center"> <a href="#" onclick="toggle_visibility('gallery'); toggle_visibility('box');">Log In </a></href></td>
     </tr>
 </table>
 </div> 
 
 <div id="gallery" style="display:none">
-<h2>My Photo Gallery</h2>
-<div class="img">
+<div id="header">
+	<table width="90%">
+		<tr>
+			<td>
+				<h2>My Photo Gallery</h2>
+			<td>
+			<td>
+				<a href="#" onclick="toggle_visibility('upload');">Add</a>
+			</td>
+				<td>
+				<a href="#" onclick="toggle_visibility('box');toggle_visibility('gallery');">Log out</a>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="img1" class="img">
 	<a href="#">
 		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
 	</a>
-  <div class="desc">Delete</div>
+  <div class="desc"><a href="#" onclick="toggle_visibility('img1');">Delete</a></div>
 </div>
-<div class="img">
+<div id="img2" class="img">
  	<a href="#">
 		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
 	</a>
-	<div class="desc">Delete</div>
+	<div class="desc"><a href="#" onclick="toggle_visibility('img2');">Delete</a></div>
 </div>
-<div class="img">
+<div id="img3" class="img">
 	<a href="#">
 		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
 	</a>
-  <div class="desc">Delete</div>
+  <div class="desc"><a href="#" onclick="toggle_visibility('img3');">Delete</a></div>
 </div>
-<div class="img">
+<div  id="img4" class="img" style="display:none">
  	<a href="#">
 		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="110" height="90">
 	</a>
-	<div class="desc">Delete</div>
+	<div class="desc"><a href="#" onclick="toggle_visibility('img4');">Delete</a></div>
+</div>
+
+
+<div id="upload" style="display:none">
+<form action="#" method="post" enctype="multipart/form-data">
+<table>
+	<tr>
+		<td>
+		<label for="file">Filename:</label>
+		</td>
+		<td>
+		<input type="file" name="file" id="file"><br>
+		</td>
+		<td>
+		<a href="#" onclick="toggle_visibility('img4'); toggle_visibility('upload');">Upload</a>
+		</td>
+</form>
 </div>
 
 </div> 

@@ -3,87 +3,55 @@ var treeData = {
     type: "platform"
 };
 
-var options = {
-    nodeRadius: 5,
-    fontSize: 12,
+var treeOptions = {
+    platformWidth: 70,
+    platformBorder: 20,
     boxWidth: 140,
     boxHeight: 40,
-    platformWidth: 70,
-    platformBorder: 30,
-    imageWidth: 140,
-    imageHeight: 60
+    markerRadius: 12
 };
 
-var layoutRoot;
-var size;
-
-function visit(parent, visitFn, childrenFn) {
-    if (!parent) return;
-
-    visitFn(parent);
-
-    var children = childrenFn(parent);
-    if (children) {
-        var count = children.length;
-        for (var i = 0; i < count; i++) {
-            visit(children[i], visitFn, childrenFn);
-        }
-    }
+var treeLayout = {
+    layoutRoot: {},
+    size: {}
 }
-
 
 
 /* Create initial graph structure */
 function createTreeGraph() {
 	// Size of the diagram
     // var size = { width:$(containerName).outerWidth(), height: totalNodes * 80};
-    size = { width:$("#tree-container").outerWidth(), height: $("#tree-container").outerHeight()};
+    treeLayout.size = { width:$("#tree-container").outerWidth(), height: $("#tree-container").outerHeight()};
 
     // Graph
- 	layoutRoot = d3.select("#tree-container")
+ 	treeLayout.layoutRoot = d3.select("#tree-container")
     	.append("svg:svg")
-    	.attr("width", size.width)
-    	.attr("height", size.height)
+    	.attr("width", treeLayout.size.width)
+    	.attr("height", treeLayout.size.height)
      	.append("svg:g")
      	.attr("class", "container")
-     	.attr("transform", "translate(" + options.platformBorder + ",0)");
+     	.attr("transform", "translate(" + treeOptions.platformBorder + ",0)");
 
     treeData.parent = treeData;
     treeData.px = treeData.x;
     treeData.py = treeData.y;
 
     /* Platform - Blue rectangle*/
-    layoutRoot.append("rect")
+    treeLayout.layoutRoot.append("rect")
         .attr("x", 0)
-        .attr("y", options.platformBorder)
-        .attr("width", options.platformWidth)
-        .attr("height", size.height - options.platformBorder * 2)
+        .attr("y", treeOptions.platformBorder)
+        .attr("width", treeOptions.platformWidth)
+        .attr("height", treeLayout.size.height - treeOptions.platformBorder * 2)
         .attr("class", "node-platform");
 }
-
-
-
-
-
 
 /* Update build/update graph according to data */
 function updateTreeGraph() {
     
-    // Calculate total nodes, max label length
-    // var totalNodes = 0;
-    // var maxLabelLength = 0;
-    // visit(treeData, function(d) {
-    //     totalNodes++;
-    //     maxLabelLength = Math.max(d.name.length, maxLabelLength);
-    // }, function(d) {
-    //     return (d.contents && d.contents.length > 0) ? d.contents : null;
-    // });
-
-
 	// Create tree layout
     var tree = d3.layout.tree()
         .sort(null)
-        .size([size.height, size.width - options.boxWidth])
+        .size([treeLayout.size.height, treeLayout.size.width - treeOptions.boxWidth])
         .children(function(d) {
             return (!d.contents || d.contents.length === 0) ? null : d.contents;
         });
@@ -93,9 +61,8 @@ function updateTreeGraph() {
     var links = tree.links(nodes);
 
 	// Transition object 
-	var t = layoutRoot.transition()
+	var t = treeLayout.layoutRoot.transition()
       	.duration(1000);
-
 
 	/* Edges  */
     // Link position function for enter
@@ -103,14 +70,14 @@ function updateTreeGraph() {
  		.source(function(d) {
  			var corrected = {
  				x: d.source.px,
- 				y: d.source.py + options.boxWidth / 2
+ 				y: d.source.py + treeOptions.boxWidth / 2
  			}
  			return corrected;
  		})
  		.target(function(d) {
  			var corrected = {
  				x: d.source.px,
- 				y: d.source.py + options.boxWidth / 2
+ 				y: d.source.py + treeOptions.boxWidth / 2
  			}
  			return corrected;
  		})
@@ -123,14 +90,14 @@ function updateTreeGraph() {
  		.source(function(d) {
  			var corrected = {
  				x: d.source.x,
- 				y: d.source.y + options.boxWidth / 2
+ 				y: d.source.y + treeOptions.boxWidth / 2
  			}
  			return corrected;
  		})
  		.target(function(d) {
  			var corrected = {
  				x: d.target.x,
- 				y: d.target.y - options.boxWidth / 2
+ 				y: d.target.y - treeOptions.boxWidth / 2
  			}
  			return corrected;
  		})
@@ -140,7 +107,7 @@ function updateTreeGraph() {
 
 
     // Update data
-	var linkGroup = layoutRoot.selectAll(".link")
+	var linkGroup = treeLayout.layoutRoot.selectAll(".link")
     	.data(links, function(d) { return d.source.id + "-" + d.target.id; });
     	
     // Add
@@ -157,91 +124,66 @@ function updateTreeGraph() {
      	.attr("d", linkUpdate);
 
 
-
     /* Nodes */
     // Update data
-	var nodeGroup = layoutRoot.selectAll("g.node")
-    	.data(nodes, function(d) { return d.id; });
+	var nodeGroup = treeLayout.layoutRoot.selectAll(".node")
+    	.data(nodes, function(d) {
+            return d.id;
+        });
 
     // Add
     nodeGroup.enter().append("svg:g")
      	.attr("class", "node")
      	.attr("transform", function(d) {
-     		var x = d.parent == null ? d.px : (d.parent.py + options.boxWidth);
+     		var x = d.parent == null ? d.px : (d.parent.py + treeOptions.boxWidth);
      		var y = d.parent == null ? d.py : d.parent.px;
          	return "translate(" + x + "," + y + ")";
 		})
 		.each(function(d, i) {
 	    var g = d3.select(this);
-	    if(d.type == 'platform') {
-	    	// Platform drawn separately
-	    } else if(d.type == 'user')  {
+        if (d.type == 'user' || d.type == 'gallery' || d.type == 'image')  {
 	      	g.append("rect")
-	      		.attr("x", -(options.boxWidth / 2))
-	 			.attr("y", -(options.boxHeight / 2))
-				.attr("width", options.boxWidth)
-				.attr("height", options.boxHeight);
+	      		.attr("x", -(treeOptions.boxWidth / 2))
+	 			.attr("y", -(treeOptions.boxHeight / 2))
+				.attr("width", treeOptions.boxWidth)
+				.attr("height", treeOptions.boxHeight);
 
-			g.append("svg:text")
-    			.attr("text-anchor", "middle")
-     			.attr("dx", function(d) {
-        			return 0;
-				})
-     			.attr("dy", function(d) {
-        			return ".35em";
-				})
-     			.text(function(d) {
-         			return d.name;
-				});
-	    } else if(d.type == 'gallery')  {
-	      	g.append("rect")
-	      		.attr("x", -(options.boxWidth / 2))
-	 			.attr("y", -(options.boxHeight / 2))
-				.attr("width", options.boxWidth)
-				.attr("height", options.boxHeight);
-
-			g.append("svg:text")
-    			.attr("text-anchor", "middle")
-     			.attr("dx", function(d) {
-        			return 0;
-				})
-     			.attr("dy", function(d) {
-        			return ".35em";
-				})
-     			.text(function(d) {
-         			return d.name;
-				});
-	    } else if(d.type == 'image')  {
-	      	g.append("rect")
-	      		.attr("x", -(options.imageWidth / 2))
-	 			.attr("y", -(options.imageHeight / 2))
-				.attr("width", options.imageWidth)
-				.attr("height", options.imageHeight);
-
-			g.append("svg:image")
-			.attr("xlink:href", d.name)
-			.attr("x", 3 - (options.imageWidth / 2))
-			.attr("y", 3 - (options.imageHeight / 2))
-			.attr("width", options.imageWidth - 6)
-			.attr("height", options.imageHeight - 6);
-	    }
-
-	    // Common
-	    g.select("rect").attr("class", function(d) {
-	  		return "node-" + d.type;
-		});
-
-        if (d.marked) {
+        if (d.type == 'user' || d.type == 'gallery') {
             g.append("svg:text")
                 .attr("text-anchor", "middle")
-                .attr("dx", function(d) {
-                    return options.boxWidth;
-                })
-                .attr("dy", function(d) {
-                    return ".35em";
-                })
+                .attr("dx", 0)
+                .attr("dy", ".35em")
                 .text(function(d) {
-                    return d.gcCount;
+                    return d.name;
+                });
+            } else {
+    			g.append("svg:image")
+    			.attr("xlink:href", d.name)
+    			.attr("x", 2 - (treeOptions.boxWidth / 2))
+    			.attr("y", 2 - (treeOptions.boxHeight / 2))
+    			.attr("width", treeOptions.boxWidth - 4)
+    			.attr("height", treeOptions.boxHeight - 4);
+    	    }
+
+            // Common
+            g.select("rect").attr("class", function(d) {
+                return "node-" + d.type;
+            });
+
+            // Marked marker
+            g.append("svg:circle")
+                .attr("class", "marked-marker")
+                .attr("cx", treeOptions.boxWidth / 2)
+                .attr("cy", - treeOptions.boxHeight / 2)
+                .attr("r", treeOptions.markerRadius);
+            g.append("svg:text")
+                .attr("class", "marked-text")
+                .attr("text-anchor", "middle")
+                .attr("dx", treeOptions.boxWidth / 2)
+                .attr("dy", "-.5em")
+                .text("*")
+                .attr("style", function(d) {
+                    return d.marked ? "" : "display: none";
                 });
         }
 	});
@@ -256,7 +198,9 @@ function updateTreeGraph() {
          	return "translate(" + d.y + "," + d.x + ")";
 	});
 
-
+    treeLayout.layoutRoot.selectAll(".marked-marker, .marked-text").attr("style", function(d) {
+            return d.marked ? "" : "display: none";
+        });
 }
 
 

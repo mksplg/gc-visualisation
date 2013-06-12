@@ -1,7 +1,4 @@
-var treeData = {
-    name: "Platform",
-    type: "platform"
-};
+var treeData = {};
 
 var treeOptions = {
     platformWidth: 70,
@@ -16,6 +13,15 @@ var treeLayout = {
     size: {}
 }
 
+
+function initTree() {
+    treeData.id = generateUID();
+    treeData.name = "Platform";
+    treeData.type = "platform";
+    treeData.gcCount = 4;
+
+    createTreeGraph();
+}
 
 /* Create initial graph structure */
 function createTreeGraph() {
@@ -43,6 +49,20 @@ function createTreeGraph() {
         .attr("width", treeOptions.platformWidth)
         .attr("height", treeLayout.size.height - treeOptions.platformBorder * 2)
         .attr("class", "node-platform");
+
+    // Marked marker
+    treeLayout.layoutRoot.append("svg:circle")
+        .attr("class", "platform-marked-marker")
+        .attr("cx", treeOptions.platformWidth)
+        .attr("cy", treeOptions.platformBorder)
+        .attr("r", treeOptions.markerRadius);
+    treeLayout.layoutRoot.append("svg:text")
+        .attr("class", "platform-marked-text")
+        .attr("text-anchor", "middle")
+        .attr("dx", treeOptions.platformWidth)
+        .attr("dy", treeOptions.platformBorder + 10)
+        .text("*");
+
 }
 
 /* Update build/update graph according to data */
@@ -141,51 +161,53 @@ function updateTreeGraph() {
 		})
 		.each(function(d, i) {
 	    var g = d3.select(this);
-        if (d.type == 'user' || d.type == 'gallery' || d.type == 'image')  {
-	      	g.append("rect")
-	      		.attr("x", -(treeOptions.boxWidth / 2))
-	 			.attr("y", -(treeOptions.boxHeight / 2))
-				.attr("width", treeOptions.boxWidth)
-				.attr("height", treeOptions.boxHeight);
+        // if (d.type == 'user' || d.type == 'gallery' || d.type == 'image')  {
 
-        if (d.type == 'user' || d.type == 'gallery') {
-            g.append("svg:text")
-                .attr("text-anchor", "middle")
-                .attr("dx", 0)
-                .attr("dy", ".35em")
-                .text(function(d) {
-                    return d.name;
-                });
+            if (d.type == 'platform') {
+
             } else {
-    			g.append("svg:image")
-    			.attr("xlink:href", d.name)
-    			.attr("x", 2 - (treeOptions.boxWidth / 2))
-    			.attr("y", 2 - (treeOptions.boxHeight / 2))
-    			.attr("width", treeOptions.boxWidth - 4)
-    			.attr("height", treeOptions.boxHeight - 4);
-    	    }
+                g.append("rect")
+                    .attr("x", -(treeOptions.boxWidth / 2))
+                    .attr("y", -(treeOptions.boxHeight / 2))
+                    .attr("width", treeOptions.boxWidth)
+                    .attr("height", treeOptions.boxHeight);
+
+                if (d.type == 'user' || d.type == 'gallery') {
+                    g.append("svg:text")
+                        .attr("text-anchor", "middle")
+                        .attr("dx", 0)
+                        .attr("dy", ".35em")
+                        .text(function(d) {
+                            return d.name;
+                        });
+                } else {
+                    g.append("svg:image")
+                    .attr("xlink:href", d.name)
+                    .attr("x", 2 - (treeOptions.boxWidth / 2))
+                    .attr("y", 2 - (treeOptions.boxHeight / 2))
+                    .attr("width", treeOptions.boxWidth - 4)
+                    .attr("height", treeOptions.boxHeight - 4);
+                }
+
+                // Marked marker
+                g.append("svg:circle")
+                    .attr("class", "marked-marker")
+                    .attr("cx", treeOptions.boxWidth / 2)
+                    .attr("cy", - treeOptions.boxHeight / 2)
+                    .attr("r", treeOptions.markerRadius);
+                g.append("svg:text")
+                    .attr("class", "marked-text")
+                    .attr("text-anchor", "middle")
+                    .attr("dx", treeOptions.boxWidth / 2)
+                    .attr("dy", "-.5em")
+                    .text("*");
+            }
 
             // Common
             g.select("rect").attr("class", function(d) {
                 return "node-" + d.type;
             });
-
-            // Marked marker
-            g.append("svg:circle")
-                .attr("class", "marked-marker")
-                .attr("cx", treeOptions.boxWidth / 2)
-                .attr("cy", - treeOptions.boxHeight / 2)
-                .attr("r", treeOptions.markerRadius);
-            g.append("svg:text")
-                .attr("class", "marked-text")
-                .attr("text-anchor", "middle")
-                .attr("dx", treeOptions.boxWidth / 2)
-                .attr("dy", "-.5em")
-                .text("*")
-                .attr("style", function(d) {
-                    return d.marked ? "" : "display: none";
-                });
-        }
+            // }
 	});
 
     // Remove
@@ -200,6 +222,10 @@ function updateTreeGraph() {
 
     treeLayout.layoutRoot.selectAll(".marked-marker, .marked-text").attr("style", function(d) {
             return d.marked ? "" : "display: none";
+        });
+
+    treeLayout.layoutRoot.selectAll(".platform-marked-marker, .platform-marked-text").attr("style", function(d) {
+            return treeData.marked ? "" : "display: none";
         });
 }
 

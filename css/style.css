@@ -44,7 +44,7 @@ path.link {
   	right: 10px;
   	top: 10px;
   	width: 800px;
-  	height: 48%;
+  	height: 40%;
   	background-color: #494949;
   	border: 1px solid #232323;
 }
@@ -54,7 +54,7 @@ path.link {
     right: 10px;
     bottom: 10px;
     width: 800px;
-    height: 48%;
+    height: 56%;
     background-color: #494949;
     border: 1px solid #232323;
 }
@@ -222,12 +222,15 @@ div.desc
     fill: #232323;
 }
 
-.marked-marker {
+.marked-marker, .platform-marked-marker {
     fill: #232323;
     stroke: #232323;
     stroke-width: 1px;
 }
-.marked-text {
+.marked-text, .platform-marked-text {
+    font-family: Verdana, Helvetica; 
+    font-size: 20px;
+    font-weight: bold;
     fill: #FFFFFF;
 }
 

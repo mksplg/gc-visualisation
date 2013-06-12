@@ -7,7 +7,8 @@ var memory = {
 
 var memOptions = {
 	diagramBorder: 20,
-	memAreaDistance: 20
+	memAreaDistance: 20,
+	numOfSlots: 16
 }
 
 var memLayout = {
@@ -17,6 +18,15 @@ var memLayout = {
 	survivor1: {},
 	survivor2: {},
 	old: {}
+}
+
+function initMem() {
+	var newMemObject = {};
+	newMemObject.id = treeData.id;
+	newMemObject.treeObject = treeData;
+	memory.old.push(newMemObject);
+
+	createMemGraph();
 }
 
 function createMemGraph() {
@@ -46,28 +56,28 @@ function createMemGraph() {
     memLayout.eden.width = areaWidth;
     memLayout.eden.height = areaHeight;
     memLayout.eden.boxWidth = areaWidth;
-    memLayout.eden.boxHeight = areaHeight / 10;
+    memLayout.eden.boxHeight = areaHeight / memOptions.numOfSlots;
 
     memLayout.survivor1.x = areaXOffset;
     memLayout.survivor1.y = 0;
     memLayout.survivor1.width = areaWidth;
     memLayout.survivor1.height = survivorHeight;
     memLayout.survivor1.boxWidth = areaWidth;
-    memLayout.survivor1.boxHeight = survivorHeight / 5;
+    memLayout.survivor1.boxHeight = survivorHeight / (memOptions.numOfSlots / 2);
 
     memLayout.survivor2.x = areaXOffset;
     memLayout.survivor2.y = survivorYOffset;
     memLayout.survivor2.width = areaWidth;
     memLayout.survivor2.height = survivorHeight;
     memLayout.survivor2.boxWidth = areaWidth;
-    memLayout.survivor2.boxHeight = survivorHeight / 5;
+    memLayout.survivor2.boxHeight = survivorHeight / (memOptions.numOfSlots / 2);
 
     memLayout.old.x = 2 * areaXOffset;
     memLayout.old.y = 0;
     memLayout.old.width = areaWidth;
     memLayout.old.height = areaHeight;
     memLayout.old.boxWidth = areaWidth;
-    memLayout.old.boxHeight = areaHeight / 10;
+    memLayout.old.boxHeight = areaHeight / memOptions.numOfSlots;
 
     // Memory area boxes
 	memLayout.layoutRoot.append("rect")
@@ -126,16 +136,14 @@ function updateMemArea(data, layoutData, clazz) {
 		})
 		.each(function(d, i) {
 	    var g = d3.select(this);
-	    if(d.treeObject.type == 'platform') {
-	    	// Ignore type
-	    } else if(d.treeObject.type == 'user' || d.treeObject.type == 'gallery' || d.treeObject.type == 'image')  {
-	      	g.append("rect")
-	      		.attr("x", -(layoutData.boxWidth / 2))
-	 			.attr("y", -(layoutData.boxHeight / 2))
-				.attr("width", layoutData.boxWidth)
-				.attr("height", layoutData.boxHeight);
 
-		if(d.treeObject.type == 'user' || d.treeObject.type == 'gallery') {
+      	g.append("rect")
+      		.attr("x", -(layoutData.boxWidth / 2))
+ 			.attr("y", -(layoutData.boxHeight / 2))
+			.attr("width", layoutData.boxWidth)
+			.attr("height", layoutData.boxHeight);
+
+		if(d.treeObject.type == 'user' || d.treeObject.type == 'gallery' || d.treeObject.type == 'platform') {
 			g.append("svg:text")
     			.attr("text-anchor", "middle")
      			.attr("dx", function(d) {
@@ -147,14 +155,14 @@ function updateMemArea(data, layoutData, clazz) {
      			.text(function(d) {
          			return d.treeObject.name;
 				});
-			} else {
-				g.append("svg:image")
-					.attr("xlink:href", d.treeObject.name)
-					.attr("x", - (layoutData.boxWidth / 2))
-					.attr("y", 1 - (layoutData.boxHeight / 2))
-					.attr("width", layoutData.boxWidth)
-					.attr("height", layoutData.boxHeight - 2);
-			}
+		} else {
+			g.append("svg:image")
+				.attr("xlink:href", d.treeObject.name)
+				.attr("x", - (layoutData.boxWidth / 2))
+				.attr("y", 1 - (layoutData.boxHeight / 2))
+				.attr("width", layoutData.boxWidth)
+				.attr("height", layoutData.boxHeight - 2);
+		}
 
 	    	// Common
 		    g.select("rect").attr("class", function(d) {
@@ -191,7 +199,6 @@ function updateMemArea(data, layoutData, clazz) {
 				.attr("text-anchor", "middle")
 	 			.attr("dx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2)
 	 			.attr("dy", ".35em");
-		}
 	});
 
     // Remove

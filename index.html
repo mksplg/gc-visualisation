@@ -10,6 +10,7 @@
 <script type="text/javascript" src="js/tree.js"></script>
 <script type="text/javascript" src="js/treeFunctions.js"></script>
 <script type="text/javascript" src="js/memory.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
 <script>
 <!--
     function toggle_visibility(id) {
@@ -26,15 +27,14 @@
 <div id="memory-container"></div>
 
 
-<input type="button" value="asdf" onClick="login(sessionData.session1, 1);"/>
-<input type="button" value="asdf" onClick="addGallery(sessionData.session1, 1, 0);"/>
-<input type="button" value="asdf" onClick="addImage(sessionData.session1, 1, 0, 0);"/>
-<input type="button" value="asdf" onClick="tenureGC();"/>
+<input type="button" value="Add User" onClick="login(sessionData.session1, 1);"/>
+<input type="button" value="Add Gallery" onClick="addGallery(sessionData.session1, 1, 0);"/>
+<input type="button" value="Add Image" onClick="addImage(sessionData.session1, 1, 0, 0);"/>
+<input type="button" value="Run GC" onClick="tenureGC();"/>
 <input type="button" value="asdf" onClick="fullGC();"/>
 
-<div id="page">
-<div id="box">
-
+<div class="page">
+<div class="login" style="display:none">
 <table>
     <tr>
       <td align="right"><p id="text">Username:</p></td>
@@ -60,8 +60,8 @@
 </table>
 </div> 
 
-<div id="gallery" style="display:none">
-<div id="header">
+<div id="gallery1" class="gallery">
+<div class="header">
 	<table width="100%" >
 		<tr>
 			<td>
@@ -76,6 +76,7 @@
 		</tr>
 	</table>
 </div>
+<!--
 <div id="img1" class="img">
 	<a href="#">
 		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="60" height="40">
@@ -100,9 +101,9 @@
 	</a>
 	<div class="desc"><a href="#" onclick="toggle_visibility('img4');">Delete</a></div>
 </div>
+-->
 
-
-<div id="upload" style="display:none">
+<div class="upload" style="display:none">
 <form action="#" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
@@ -120,6 +121,10 @@
 
 </div> 
 </div>
+
+
+
+
 <script>
     $(function(){
     	initTree();

@@ -141,7 +141,10 @@ function updateTreeGraph() {
 
 	// Update all
     t.selectAll(".link")
-     	.attr("d", linkUpdate);
+     	.attr("d", linkUpdate)
+        .attr("style", function(d) {
+            return d.target.deleted ? "display: none;" : "";
+        });
 
 
     /* Nodes */
@@ -207,7 +210,6 @@ function updateTreeGraph() {
             g.select("rect").attr("class", function(d) {
                 return "node-" + d.type;
             });
-            // }
 	});
 
     // Remove
@@ -228,8 +230,4 @@ function updateTreeGraph() {
             return treeData.marked ? "" : "display: none";
         });
 }
-
-
-
-
 

@@ -79,8 +79,7 @@ path.link {
     stroke-width: 1px;
 }
 	
-#page
-{
+.page {
 	background-repeat:no-repeat;
 	background-position: left;
 	background-attachment: fixed;
@@ -127,8 +126,7 @@ input[type="submit"]:focus:hover {
 	color: #000000;
 }
 
-#box
-{
+.login {
 	position: absolute;
 	width: 50%;
 	height: 30%;
@@ -136,36 +134,35 @@ input[type="submit"]:focus:hover {
 	top: 30%;
 }
 
-#gallery {
+.gallery {
 	padding: 2em 0;
 	margin: 0 auto;
 	width: 300px;
 	font: small Verdana, sans-serif;
 }
 
-#gallery table {
+.gallery table {
 	margin: 0;
 	border-bottom: 1px solid #666;
 }
 
-#gallery h2 {
+.gallery h2 {
 	color:black;
 	font-size:14px;
 }
 
-#gallery a {
+.gallery a {
 	color:black;
 	font-size:12px;
 }
 
-#box a {
+.login a {
 	font-family:arial;
 	color:black;
 	font-size:16px;
 }
 
-#text
-{
+#text {
 	font-family:arial;
 	color:black;
 	font-size:16px;
@@ -178,8 +175,7 @@ div.heading{
 	align:center
 }
 
-div.img
-  {
+div.img {
   margin: 20px 2px 0 0;
 
   border:1px solid #000000;
@@ -188,25 +184,23 @@ div.img
   float:left;
   text-align:center;
   }
-div.img img
-  {
+div.img img {
   display:inline;
   margin:3px;
   border:1px solid #000000;
-  }
-div.img a:hover img
-  {
+}
+div.img a:hover img {
   border:1px solid #000000;
-  }
-div.desc
-  {
+}
+
+div.desc {
   text-align:center;
   font-weight:normal;
   width:70px;
   margin:2px;
-  }
+}
   
-#upload {
+.upload {
     width: 390px;
     height: 50px;
 	display:block; position:absolute;

@@ -1,8 +1,8 @@
-var sessionData = {
-	session1: {},
-	session2: {}
-};
-
+function updateGraphs() {
+    updateMemGraph();
+    updateTreeGraph();
+    updateGalleries();
+}
 
 function login(sessionObj, newUserIx) {
 	// Tree
@@ -17,18 +17,16 @@ function login(sessionObj, newUserIx) {
 
 	sessionObj.treeUserIx = treeData.contents.push(newTreeObject) - 1;
 
-	updateTreeGraph();
-
 	// Memory
 	var newMemObject = {};
 	newMemObject.id = newTreeObject.id;
 	newMemObject.treeObject = newTreeObject;
 	memory.eden.push(newMemObject);
 
-	updateMemGraph();
+	updateGraphs();
 }
 
-function addGallery(sessionObj, newUserIx, galleryIx) {
+function addGallery(sessionObj, userIx, galleryIx) {
 	// Tree
 	if (treeData.contents[sessionObj.treeUserIx].contents == null) {
 		treeData.contents[sessionObj.treeUserIx].contents = [];
@@ -36,12 +34,10 @@ function addGallery(sessionObj, newUserIx, galleryIx) {
 
 	var newTreeObject = {};
 	newTreeObject.id = generateUID();
-	newTreeObject.name = data[newUserIx].galleries[galleryIx].gallery.name;
-	newTreeObject.type = data[newUserIx].galleries[galleryIx].gallery.type;
+	newTreeObject.name = data[userIx].galleries[galleryIx].gallery.name;
+	newTreeObject.type = data[userIx].galleries[galleryIx].gallery.type;
 
 	treeData.contents[sessionObj.treeUserIx].contents.push(newTreeObject);
-
-	updateTreeGraph();
 
 	// Memory
 	var newMemObject = {};
@@ -49,10 +45,10 @@ function addGallery(sessionObj, newUserIx, galleryIx) {
 	newMemObject.treeObject = newTreeObject;
 	memory.eden.push(newMemObject);
 
-	updateMemGraph();
+	updateGraphs();
 }
 
-function addImage(sessionObj, newUserIx, galleryIx, imageIx) {
+function addImage(sessionObj, userIx, galleryIx, imageIx) {
 	// Tree
 	if (treeData.contents[sessionObj.treeUserIx].contents[galleryIx].contents == null) {
 		treeData.contents[sessionObj.treeUserIx].contents[galleryIx].contents = [];
@@ -60,12 +56,10 @@ function addImage(sessionObj, newUserIx, galleryIx, imageIx) {
 
 	var newTreeObject = {};
 	newTreeObject.id = generateUID();
-	newTreeObject.name = data[newUserIx].galleries[galleryIx].images[imageIx].name;
-	newTreeObject.type = data[newUserIx].galleries[galleryIx].images[imageIx].type;
+	newTreeObject.name = data[userIx].galleries[galleryIx].images[imageIx].name;
+	newTreeObject.type = data[userIx].galleries[galleryIx].images[imageIx].type;
 
 	treeData.contents[sessionObj.treeUserIx].contents[galleryIx].contents.push(newTreeObject);
-
-	updateTreeGraph();
 
 	// Memory
 	var newMemObject = {};
@@ -73,8 +67,28 @@ function addImage(sessionObj, newUserIx, galleryIx, imageIx) {
 	newMemObject.treeObject = newTreeObject;
 	memory.eden.push(newMemObject);
 
-	updateMemGraph();
+	// Session
+	var newSessionObject = {};
+	newSessionObject.id = newTreeObject.id;
+	newSessionObject.treeObject = newTreeObject;
+	sessionObj.gallery.push(newSessionObject);
+
+	updateGraphs();
 }
+
+
+
+function deleteImage(galleryObject, imageId) {
+	for(var i = 0; i < galleryObject.length; i++) {
+		if(galleryObject[i].id == imageId) {
+			galleryObject[i].treeObject.deleted = true;
+			galleryObject.splice(i, 1);
+		}
+	}
+
+	updateGraphs();
+}
+
 
 
 function generateUID() {

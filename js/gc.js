@@ -9,11 +9,6 @@ var gcData = {
 	copyTimeout: 0
 }
 
-function updateGraphs() {
-	updateMemGraph();
-	updateTreeGraph();
-}
-
 function tenureGC() {
 	gcData.markTimeout = 0;
 	gcData.copyTimeout = 0;
@@ -38,16 +33,18 @@ function clearMarked(data) {
 function mark(parent, root) {
 	if (!parent) return;
 
-	gcData.markTimeout += gcOptions.timeout;
-	setTimeout(function() {
-		parent.marked = true;
-		updateGraphs();
-	}, gcData.markTimeout);
+	if (!parent.deleted) {
+		gcData.markTimeout += gcOptions.timeout;
+		setTimeout(function() {
+			parent.marked = true;
+			updateGraphs();
+		}, gcData.markTimeout);
 
-	var children = (parent.contents && parent.contents.length > 0) ? parent.contents : null;
-	if (children) {
-		for(var i = 0; i < children.length; i++) {
-			mark(children[i], false);
+		var children = (parent.contents && parent.contents.length > 0) ? parent.contents : null;
+		if (children) {
+			for(var i = 0; i < children.length; i++) {
+				mark(children[i], false);
+			}
 		}
 	}
 
@@ -92,7 +89,25 @@ function tenureGC_switch() {
 	clearMarked(memory.survivor1);
 	clearMarked(memory.survivor2);
 	clearMarked(memory.old);
+
+	removeDeleted(treeData);
+
 	updateGraphs();
+}
+
+function removeDeleted(parent) {
+	if (!parent) return;
+
+	var children = (parent.contents && parent.contents.length > 0) ? parent.contents : null;
+	if (children) {
+		for(var i = 0; i < children.length; i++) {
+			removeDeleted(children[i]);
+			if (children[i].deleted) {
+				parent.contents.splice(i, 1)
+				i--;
+			}
+		}
+	}
 }
 
 function fullGC() {

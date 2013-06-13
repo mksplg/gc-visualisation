@@ -57,6 +57,11 @@ function addGallery(sessionObj, userIx, galleryIx) {
 	updateGraphs();
 }
 
+function addNextImage(galleryObject, userIx, galleryIx) {
+	galleryObject.imageIx = (galleryObject.imageIx == null || galleryObject.imageIx == 'undefined') ? 0 : (galleryObject.imageIx + 1) % 9;
+	addImage(galleryObject, userIx, galleryIx, galleryObject.imageIx);
+}
+
 function addImage(galleryObject, userIx, galleryIx, imageIx) {
 	// Tree
 	if (galleryObject.treeObject.contents == null) {
@@ -70,7 +75,7 @@ function addImage(galleryObject, userIx, galleryIx, imageIx) {
 	var newTreeObject = {};
 	newTreeObject.id = generateUID();
 	newTreeObject.name = data[userIx].galleries[galleryIx].images[imageIx].name;
-	newTreeObject.type = data[userIx].galleries[galleryIx].images[imageIx].type;
+	newTreeObject.type = "image";
 
 	galleryObject.treeObject.contents.push(newTreeObject);
 

@@ -28,9 +28,11 @@
 
 <input type="button" value="Add User" onClick="login(sessionData.session1, 1);"/>
 <input type="button" value="Add Gallery" onClick="addGallery(sessionData.session1, 1, 0);"/>
-<input type="button" value="Add Image" onClick="addImage(sessionData.session1.gallery, 1, 0, 0);"/>
+<input type="button" value="Add Image" onClick="addNextImage(sessionData.session1.gallery, 1, 0);"/>
 <input type="button" value="Run GC" onClick="tenureGC();"/>
 <input type="button" value="asdf" onClick="fullGC();"/>
+
+<div id="page-container">
 
 <div id="page1" class="page">
 <div id="login1" class="login">
@@ -63,33 +65,85 @@
 <div class="header">
 	<table width="100%" >
 		<tr>
-			<td>
-				<h2>My Photo Gallery</h2>
-			<td>
-			<td align="right">
-				<a id="add" href="#" onclick="toggle_visibility('upload');">Add</a>
-			</td>
-				<td align="right">
-				<a id="logout" href="#" onclick="toggle_visibility('login1');toggle_visibility('gallery1');logout(sessionData.session1)">Log out</a>
+			<td><h2>My Photo Gallery</h2><td>
+			<td align="right"><a id="add" href="#" onclick="toggle_visibility('upload1');">Add</a></td>
+			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login1');toggle_visibility('gallery1');logout(sessionData.session1)">Log out</a>
 			</td>
 		</tr>
 	</table>
 </div>
 
-<div class="upload" style="display:none">
+<div id="upload1" class="upload" style="display:none">
 <form action="#" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td><label for="file">Filename:</label></td>
 		<td><input type="file" name="file" id="file"><br></td>
-		<td><a href="#" onclick="toggle_visibility('upload');addImage(sessionData.session1, 1, 0, 0);">Upload</a></td>
+		<td><a href="#" onclick="toggle_visibility('upload1');addImage(sessionData.session1.gallery, 1, 0, 0);">Upload</a></td>
+	</tr>
+</table>
 </form>
 </div>
-
 </div> 
+
 </div>
 
 
+
+<div id="page2" class="page">
+<div id="login2" class="login">
+<table>
+    <tr>
+      <td align="right"><p id="text">Username:</p></td>
+      <td align="left">
+		<input type="text" name="j_username" value="Susie">
+	</td>
+    </tr>
+    <tr>
+      <td align="right"><p id="text">Password:</p></td>
+      <td align="left"><input type="password" name="j_password" value="*******"></td>
+    </tr>
+    <tr>
+      <td align="right"></td>
+      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('gallery2'); 
+												toggle_visibility('login2');
+												login(sessionData.session2, 0);
+												addGallery(sessionData.session2, 0, 0);
+												addImage(sessionData.session2.gallery, 0, 0, 0);
+												addImage(sessionData.session2.gallery, 0, 0, 1);
+												">Log In </a></href></td>
+    </tr>
+</table>
+</div> 
+
+<div id="gallery2" class="gallery" style="display: none;">
+<div class="header">
+	<table width="100%" >
+		<tr>
+			<td><h2>My Photo Gallery</h2><td>
+			<td align="right"><a id="add" href="#" onclick="toggle_visibility('upload2');">Add</a></td>
+			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login2');toggle_visibility('gallery2');logout(sessionData.session1)">Log out</a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="upload2" class="upload" style="display:none">
+<form action="#" method="post" enctype="multipart/form-data">
+<table>
+	<tr>
+		<td><label for="file">Filename:</label></td>
+		<td><input type="file" name="file" id="file"><br></td>
+		<td><a href="#" onclick="toggle_visibility('upload2');addImage(sessionData.session2.gallery, 0, 0);">Upload</a></td>
+	</tr>
+</table>
+</form>
+</div>
+</div> 
+
+</div>
+
+</div>
 
 
 <script>
@@ -99,15 +153,6 @@
 
 		initMem();
 		updateMemGraph();
-
-
-
-		// addUser(0);
-		// addGallery(0, 0);
-		// addGallery(0, 1);
-		// addImage(0, 0, 0);
-		// addImage(0, 0, 1);
-		// addImage(0, 0, 2);
     });
 </script>
 </body>

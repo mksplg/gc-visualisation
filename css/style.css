@@ -43,7 +43,7 @@ path.link {
   	position: absolute;
   	right: 10px;
   	top: 10px;
-  	width: 800px;
+  	width: 50%;
   	height: 40%;
   	background-color: #494949;
   	border: 1px solid #232323;
@@ -53,7 +53,7 @@ path.link {
     position: absolute;
     right: 10px;
     bottom: 10px;
-    width: 800px;
+    width: 50%;
     height: 56%;
     background-color: #494949;
     border: 1px solid #232323;
@@ -79,16 +79,22 @@ path.link {
     stroke-width: 1px;
 }
 	
-.page {
+#page-container {
 	background-repeat:no-repeat;
 	background-position: left;
 	background-attachment: fixed;
-	background-color: #F2F2F2;
 	position: absolute;
-	width: 400px;
-	height: 300px;
-	left: 5%;
-	top: 10%;
+	left: 50px;
+	top: 50px;
+  width: 50%;
+  height: 100%;
+}
+
+.page {
+  background-color: #F2F2F2;
+  width: 60%;
+  height: 30%;
+  margin: 30px;
 }
 
 input[type="text"] {
@@ -127,11 +133,11 @@ input[type="submit"]:focus:hover {
 }
 
 .login {
-	position: absolute;
+	position: relative;
 	width: 50%;
 	height: 30%;
 	left: 17%;
-	top: 30%;
+	top: 40%;
 }
 
 .gallery {

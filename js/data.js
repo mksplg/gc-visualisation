@@ -12,6 +12,9 @@
 					},
 					images: [
 						{
+							name: "images/susie/christmas/0.jpg", 
+							type: "image"
+						}, {
 							name: "images/susie/christmas/1.jpg",
 							type: "image"
 						}, {
@@ -19,6 +22,24 @@
 							type: "image"
 						}, {
 							name: "images/susie/christmas/3.jpg", 
+							type: "image"
+						}, {
+							name: "images/susie/christmas/4.jpg", 
+							type: "image"
+						}, {
+							name: "images/susie/christmas/5.jpg", 
+							type: "image"
+						}, {
+							name: "images/susie/christmas/6.jpg", 
+							type: "image"
+						}, {
+							name: "images/susie/christmas/7.jpg", 
+							type: "image"
+						}, {
+							name: "images/susie/christmas/8.jpg", 
+							type: "image"
+						}, {
+							name: "images/susie/christmas/9.jpg", 
 							type: "image"
 						}
 					]
@@ -52,38 +73,34 @@
 					},
 					images: [
 						{
-							name: "images/frank/cats/1.jpg",
+							name: "images/frank/cats/0.jpg",
 							type: "image"
 						}, {
 							name: "images/frank/cats/1.jpg",
 							type: "image"
 						}, {
-							name: "images/frank/cats/1.jpg", 
-							type: "image"
-						}
-					]
-				}
-			]
-		}, {
-			user: {
-				name: "Mia",
-				type: "user"
-			},
-			galleries: [
-		       	{
-		       		gallery: {
-						name: "Hiking",
-						type: "gallery"
-					},
-					images: [
-						{
-							name: "images/mia/hiking/1.jpg",
+							name: "images/frank/cats/2.jpg", 
 							type: "image"
 						}, {
-							name: "images/mia/hiking/1.jpg",
+							name: "images/frank/cats/3.jpg", 
 							type: "image"
 						}, {
-							name: "images/mia/hiking/1.jpg", 
+							name: "images/frank/cats/4.jpg", 
+							type: "image"
+						}, {
+							name: "images/frank/cats/5.jpg", 
+							type: "image"
+						}, {
+							name: "images/frank/cats/6.jpg", 
+							type: "image"
+						}, {
+							name: "images/frank/cats/7.jpg", 
+							type: "image"
+						}, {
+							name: "images/frank/cats/8.jpg", 
+							type: "image"
+						}, {
+							name: "images/frank/cats/9.jpg", 
 							type: "image"
 						}
 					]

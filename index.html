@@ -26,15 +26,14 @@
 <div id="tree-container"></div>
 <div id="memory-container"></div>
 
-
 <input type="button" value="Add User" onClick="login(sessionData.session1, 1);"/>
 <input type="button" value="Add Gallery" onClick="addGallery(sessionData.session1, 1, 0);"/>
-<input type="button" value="Add Image" onClick="addImage(sessionData.session1, 1, 0, 0);"/>
+<input type="button" value="Add Image" onClick="addImage(sessionData.session1.gallery, 1, 0, 0);"/>
 <input type="button" value="Run GC" onClick="tenureGC();"/>
 <input type="button" value="asdf" onClick="fullGC();"/>
 
-<div class="page">
-<div class="login" style="display:none">
+<div id="page1" class="page">
+<div id="login1" class="login">
 <table>
     <tr>
       <td align="right"><p id="text">Username:</p></td>
@@ -48,19 +47,19 @@
     </tr>
     <tr>
       <td align="right"></td>
-      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('gallery'); 
-												toggle_visibility('box');
+      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('gallery1'); 
+												toggle_visibility('login1');
 												login(sessionData.session1, 1);
 												addGallery(sessionData.session1, 1, 0);
-												addImage(sessionData.session1, 1, 0, 0);
-												addImage(sessionData.session1, 1, 0, 0);
-												addImage(sessionData.session1, 1, 0, 0);
+												addImage(sessionData.session1.gallery, 1, 0, 0);
+												addImage(sessionData.session1.gallery, 1, 0, 1);
+												addImage(sessionData.session1.gallery, 1, 0, 2);
 												">Log In </a></href></td>
     </tr>
 </table>
 </div> 
 
-<div id="gallery1" class="gallery">
+<div id="gallery1" class="gallery" style="display: none;">
 <div class="header">
 	<table width="100%" >
 		<tr>
@@ -71,51 +70,19 @@
 				<a id="add" href="#" onclick="toggle_visibility('upload');">Add</a>
 			</td>
 				<td align="right">
-				<a id="logout" href="#" onclick="toggle_visibility('box');toggle_visibility('gallery');">Log out</a>
+				<a id="logout" href="#" onclick="toggle_visibility('login1');toggle_visibility('gallery1');logout(sessionData.session1)">Log out</a>
 			</td>
 		</tr>
 	</table>
 </div>
-<!--
-<div id="img1" class="img">
-	<a href="#">
-		<img src="images/susie/christmas/1.jpg" alt="Klematis" width="60" height="40">
-	</a>
-  <div class="desc"><a href="#" onclick="toggle_visibility('img1');">Delete</a></div>
-</div>
-<div id="img2" class="img">
- 	<a href="#">
-		<img src="images/susie/christmas/2.jpg" alt="Klematis" width="60" height="40">
-	</a>
-	<div class="desc"><a href="#" onclick="toggle_visibility('img2');">Delete</a></div>
-</div>
-<div id="img3" class="img">
-	<a href="#">
-		<img src="images/susie/christmas/3.jpg" alt="Klematis" width="60" height="40">
-	</a>
-  <div class="desc"><a href="#" onclick="toggle_visibility('img3');">Delete</a></div>
-</div>
-<div  id="img4" class="img" style="display:none">
- 	<a href="#">
-		<img src="images/susie/christmas/4.jpg" alt="Klematis" width="60" height="40">
-	</a>
-	<div class="desc"><a href="#" onclick="toggle_visibility('img4');">Delete</a></div>
-</div>
--->
 
 <div class="upload" style="display:none">
 <form action="#" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
-		<td>
-		<label for="file">Filename:</label>
-		</td>
-		<td>
-		<input type="file" name="file" id="file"><br>
-		</td>
-		<td>
-		<a href="#" onclick="toggle_visibility('img4'); toggle_visibility('upload');addImage(sessionData.session1, 1, 0, 0);">Upload</a>
-		</td>
+		<td><label for="file">Filename:</label></td>
+		<td><input type="file" name="file" id="file"><br></td>
+		<td><a href="#" onclick="toggle_visibility('upload');addImage(sessionData.session1, 1, 0, 0);">Upload</a></td>
 </form>
 </div>
 

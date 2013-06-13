@@ -18,8 +18,12 @@ function updateGalleries() {
 function updateGallery(galleryObjectName, galleryId, gallery) {
 	var galleryRoot = d3.select("#" + galleryId);
 
+    if (!gallery.images) {
+        gallery.images = [];
+    }
+
 	var images = galleryRoot.selectAll(".img")
-    	.data(gallery, function(d) {
+    	.data(gallery.images, function(d) {
             return d.id;
         });
 

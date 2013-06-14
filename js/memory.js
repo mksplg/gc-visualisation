@@ -175,17 +175,18 @@ function updateMemArea(data, layoutData, clazz) {
 		    	.attr("cx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2 - layoutData.boxHeight + 4)
 		    	.attr("cy", 0)
 		    	.attr("r", layoutData.boxHeight / 2 - 4)
-				.attr("style", function(d) {
-					return d.treeObject.marked ? "" : "display: none";
+	 			.style("opacity", function(d) {
+					return d.treeObject.marked ? 1 : 0;
 				});
+
 		    g.append("svg:text")
 		    	.attr("class", "marked-text")
 				.attr("text-anchor", "middle")
 	 			.attr("dx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2 - layoutData.boxHeight + 4)
 	 			.attr("dy", ".5em")
 	 			.text("*")
-	 			.attr("style", function(d) {
-					return d.treeObject.marked ? "" : "display: none";
+	 			.style("opacity", function(d) {
+					return d.treeObject.marked ? 1 : 0;
 				});
 
 			// Count marker
@@ -211,8 +212,9 @@ function updateMemArea(data, layoutData, clazz) {
          	return "translate(" + x + "," + y + ")";
 	});
 
-    memLayout.layoutRoot.selectAll(".marked-marker, .marked-text").attr("style", function(d) {
-			return d.treeObject.marked ? "" : "display: none";
+    memLayout.layoutRoot.selectAll(".marked-marker, .marked-text")
+		.transition().duration(150).style("opacity", function(d) {
+			return d.treeObject.marked ? 1 : 0;
 		});
 
     memLayout.layoutRoot.selectAll(".count-text")

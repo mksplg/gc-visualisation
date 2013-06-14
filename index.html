@@ -1,6 +1,8 @@
 <html>
 <head>
 
+<title>Garbage Collection visualisation</title>
+
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 
@@ -11,6 +13,10 @@
 <script type="text/javascript" src="js/treeFunctions.js"></script>
 <script type="text/javascript" src="js/memory.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
+
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/solarized_dark.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+
 <script>
 <!--
     function toggle_visibility(id) {
@@ -31,6 +37,40 @@
 <input type="button" value="Add Image" onClick="addNextImage(sessionData.session1.gallery, 1, 0);"/>-->
 <input type="button" value="Run Minor GC" onClick="tenureGC();"/>
 <input type="button" value="Run Major GC" onClick="fullGC();"/>
+
+<div id="minor-gc-code" class="gc-code" style="display: none; opacity: 0;">
+	<pre>
+	<code class="java">
+public void minorGC() {
+	<div class="gc-mark">mark(objectTree);</div>
+	<div class="gc-copy-eden">copy(memory.eden, memory.survivorTo);</div>
+	<div class="gc-clear-eden">clear(memory.eden);</div>
+	<div class="gc-copy-survivor">copy(memory.survivorFrom, memory.survivorTo,
+    memory.old, 4);</div>
+	<div class="gc-clear-survivor">clear(memory.survivorFrom);</div>
+	<div class="gc-switch">swap(memory.survivorFrom, memory.survivorTo);</div>
+	<div class="gc-finish">cleanup();</div>
+}
+	</code>
+	</pre>
+</div>
+
+<div id="major-gc-code" class="gc-code" style="display: none; opacity: 0;">
+	<pre>
+	<code class="java">
+public void majorGC() {
+	<div class="gc-mark">mark(objectTree);</div>
+	<div class="gc-copy-eden">copy(memory.eden, memory.survivorTo);</div>
+	<div class="gc-clear-eden">clear(memory.eden);</div>
+	<div class="gc-copy-survivor">copy(memory.survivorFrom, memory.survivorTo, memory.old, 4);</div>
+	<div class="gc-clear-survivor">clear(memory.survivorFrom);</div>
+	<div class="gc-switch">swap(memory.survivorFrom, memory.survivorTo);</div>
+	<div class="gc-clear-old">garbageCollect(memory.old);</div>
+	<div class="gc-finish">cleanup();</div>
+}
+	</code>
+	</pre>
+</div>
 
 <div id="page-container">
 
@@ -157,6 +197,8 @@
 
 		initMem();
 		updateMemGraph();
+
+		hljs.initHighlightingOnLoad();
     });
 </script>
 </body>

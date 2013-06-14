@@ -87,18 +87,17 @@ path.link {
 	background-position: left;
 	background-attachment: fixed;
 	position: absolute;
-	left: 50px;
-	top: 50px;
-  width: 50%;
-  height: 80%;
+	left: 5%;
+	top: 5%;
+  width: 35%;
+  height: 90%;
 }
 
 .page {
-  background-color: #F2F2F2;
-  width: 60%;
+  width: 90%;
   height: 40%;
-  margin: 30px;
-  padding: -1px;
+  margin: 5%;
+  background-color: #F2F2F2;
 }
 
 input[type="text"] {
@@ -279,4 +278,21 @@ div.desc {
 
 	/* Internet Explorer */
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.gc-code {
+  position: absolute;
+  z-index: 10;
+  left: 30px;
+  top: 30px;
+  width: 40%;
+}
+
+.gc-code div {
+  display: inline-block;
+    width: 80%;
+}
+
+.highlighted {
+  background-color: #FFFFCC;
 }

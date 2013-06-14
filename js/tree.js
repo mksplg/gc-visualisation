@@ -204,13 +204,19 @@ function updateTreeGraph() {
                     .attr("class", "marked-marker")
                     .attr("cx", treeOptions.boxWidth / 2)
                     .attr("cy", - treeOptions.boxHeight / 2)
-                    .attr("r", treeOptions.markerRadius);
+                    .attr("r", treeOptions.markerRadius)
+                    .style("opacity", function(d) {
+                        return d.marked ? 1 : 0;
+                    });
                 g.append("svg:text")
                     .attr("class", "marked-text")
                     .attr("text-anchor", "middle")
                     .attr("dx", treeOptions.boxWidth / 2)
                     .attr("dy", "-.5em")
-                    .text("*");
+                    .text("*")
+                    .style("opacity", function(d) {
+                        return d.marked ? 1 : 0;
+                    });
             }
 
             // Common
@@ -229,12 +235,14 @@ function updateTreeGraph() {
          	return "translate(" + d.y + "," + d.x + ")";
 	});
 
-    treeLayout.layoutRoot.selectAll(".marked-marker, .marked-text").attr("style", function(d) {
-            return d.marked ? "" : "display: none";
+    treeLayout.layoutRoot.selectAll(".marked-marker, .marked-text")
+        .transition().duration(150).style("opacity", function(d) {
+            return d.marked ? 1 : 0;
         });
 
-    treeLayout.layoutRoot.selectAll(".platform-marked-marker, .platform-marked-text").attr("style", function(d) {
-            return treeData.marked ? "" : "display: none";
+    treeLayout.layoutRoot.selectAll(".platform-marked-marker, .platform-marked-text")
+        .transition().duration(150).style("opacity", function(d) {
+            return treeData.marked ? 1 : 0;
         });
 }
 

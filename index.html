@@ -49,7 +49,7 @@
     </tr>
     <tr>
       <td align="right"></td>
-      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('gallery1'); 
+      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('user1'); 
 												toggle_visibility('login1');
 												login(sessionData.session1, 1);
 												addGallery(sessionData.session1, 1, 0);
@@ -61,13 +61,14 @@
 </table>
 </div> 
 
-<div id="gallery1" class="gallery" style="display: none;">
+<div id="user1" class="user" style="display: none;">
+<div id="gallery1" class="gallery">
 <div class="header">
 	<table width="100%" >
 		<tr>
-			<td align="left"><h2>Frank's Photo Gallery</h2><td>
+			<td align="left"><h2>Frank's Cats Gallery</h2><td>
 			<td align="right"><a id="add" href="#" onclick="toggle_visibility('upload1');">Add</a></td>
-			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login1');toggle_visibility('gallery1');logout(sessionData.session1)">Log out</a>
+			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login1');toggle_visibility('user1');logout(sessionData.session1)">Log out</a>
 			</td>
 		</tr>
 	</table>
@@ -85,6 +86,7 @@
 </form>
 </div>
 </div> 
+</div>
 
 </div>
 
@@ -105,7 +107,7 @@
     </tr>
     <tr>
       <td align="right"></td>
-      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('gallery2'); 
+      <td align="center"> <a id="login" class="button" href="#" onclick="toggle_visibility('user2'); 
 												toggle_visibility('login2');
 												login(sessionData.session2, 0);
 												addGallery(sessionData.session2, 0, 0);
@@ -116,13 +118,14 @@
 </table>
 </div> 
 
-<div id="gallery2" class="gallery" style="display: none;">
+<div id="user2" class="user" style="display: none;">
+<div id="gallery2" class="gallery">
 <div class="header">
 	<table width="100%" >
 		<tr>
-			<td align="left"><h2>Susie's Photo Gallery</h2><td>
+			<td align="left"><h2>Susie's Christmas Gallery</h2><td>
 			<td align="right"><a id="add" href="#" onclick="toggle_visibility('upload2');">Add</a></td>
-			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login2');toggle_visibility('gallery2');logout(sessionData.session2)">Log out</a>
+			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login2');toggle_visibility('user2');logout(sessionData.session2)">Log out</a>
 			</td>
 		</tr>
 	</table>
@@ -140,6 +143,7 @@
 </form>
 </div>
 </div> 
+</div>
 
 </div>
 

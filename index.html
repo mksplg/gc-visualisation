@@ -53,9 +53,9 @@
 												toggle_visibility('login1');
 												login(sessionData.session1, 1);
 												addGallery(sessionData.session1, 1, 0);
-												addImage(sessionData.session1.gallery, 1, 0, 0);
-												addImage(sessionData.session1.gallery, 1, 0, 1);
-												addImage(sessionData.session1.gallery, 1, 0, 2);
+												addNextImage(sessionData.session1.gallery, 1, 0);
+												addNextImage(sessionData.session1.gallery, 1, 0);
+												addNextImage(sessionData.session1.gallery, 1, 0);
 												">Log In </a></href></td>
     </tr>
 </table>
@@ -79,7 +79,7 @@
 	<tr>
 		<td><label for="file">Filename:</label></td>
 		<td><input type="file" name="file" id="file"><br></td>
-		<td><a href="#" onclick="toggle_visibility('upload1');addImage(sessionData.session1.gallery, 1, 0, 3);">Upload</a></td>
+		<td><a href="#" onclick="toggle_visibility('upload1');addNextImage(sessionData.session1.gallery, 1, 0);">Upload</a></td>
 	</tr>
 </table>
 </form>
@@ -109,8 +109,8 @@
 												toggle_visibility('login2');
 												login(sessionData.session2, 0);
 												addGallery(sessionData.session2, 0, 0);
-												addImage(sessionData.session2.gallery, 0, 0, 0);
-												addImage(sessionData.session2.gallery, 0, 0, 1);
+												addNextImage(sessionData.session2.gallery, 0, 0);
+												addNextImage(sessionData.session2.gallery, 0, 0);
 												">Log In </a></href></td>
     </tr>
 </table>
@@ -134,7 +134,7 @@
 	<tr>
 		<td><label for="file">Filename:</label></td>
 		<td><input type="file" name="file" id="file"><br></td>
-		<td><a href="#" onclick="toggle_visibility('upload2');addImage(sessionData.session2.gallery, 0, 0, 2);">Upload</a></td>
+		<td><a href="#" onclick="toggle_visibility('upload2');addNextImage(sessionData.session2.gallery, 0, 0);">Upload</a></td>
 	</tr>
 </table>
 </form>

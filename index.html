@@ -29,8 +29,8 @@
 <input type="button" value="Add User" onClick="login(sessionData.session1, 1);"/>
 <input type="button" value="Add Gallery" onClick="addGallery(sessionData.session1, 1, 0);"/>
 <input type="button" value="Add Image" onClick="addNextImage(sessionData.session1.gallery, 1, 0);"/>
-<input type="button" value="Run GC" onClick="tenureGC();"/>
-<input type="button" value="asdf" onClick="fullGC();"/>
+<input type="button" value="Run Minor GC" onClick="tenureGC();"/>
+<input type="button" value="Run Major GC" onClick="fullGC();"/>
 
 <div id="page-container">
 
@@ -65,7 +65,7 @@
 <div class="header">
 	<table width="100%" >
 		<tr>
-			<td><h2>My Photo Gallery</h2><td>
+			<td align="left"><h2>Frank's Photo Gallery</h2><td>
 			<td align="right"><a id="add" href="#" onclick="toggle_visibility('upload1');">Add</a></td>
 			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login1');toggle_visibility('gallery1');logout(sessionData.session1)">Log out</a>
 			</td>
@@ -120,7 +120,7 @@
 <div class="header">
 	<table width="100%" >
 		<tr>
-			<td><h2>My Photo Gallery</h2><td>
+			<td align="left"><h2>Susie's Photo Gallery</h2><td>
 			<td align="right"><a id="add" href="#" onclick="toggle_visibility('upload2');">Add</a></td>
 			<td align="right"><a id="logout" href="#" onclick="toggle_visibility('login2');toggle_visibility('gallery2');logout(sessionData.session2)">Log out</a>
 			</td>

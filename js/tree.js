@@ -167,7 +167,14 @@ function updateTreeGraph() {
         // if (d.type == 'user' || d.type == 'gallery' || d.type == 'image')  {
 
             if (d.type == 'platform') {
-
+                    g.append("svg:text")
+                        .attr("text-anchor", "center")
+						.attr("class", "rotate")
+                        .attr("dx", "-2.10em")
+                        .attr("dy", "2.00em")
+                        .text(function(d) {
+                            return "Platform";
+                        });
             } else {
                 g.append("rect")
                     .attr("x", -(treeOptions.boxWidth / 2))

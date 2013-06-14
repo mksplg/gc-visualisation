@@ -59,8 +59,8 @@ function createTreeGraph() {
     treeLayout.layoutRoot.append("svg:text")
         .attr("class", "platform-marked-text")
         .attr("text-anchor", "middle")
-        .attr("dx", treeOptions.platformWidth)
-        .attr("dy", treeOptions.platformBorder + 10)
+        .attr("x", treeOptions.platformWidth)
+        .attr("y", treeOptions.platformBorder + 10)
         .text("*");
 
 }
@@ -211,8 +211,8 @@ function updateTreeGraph() {
                 g.append("svg:text")
                     .attr("class", "marked-text")
                     .attr("text-anchor", "middle")
-                    .attr("dx", treeOptions.boxWidth / 2)
-                    .attr("dy", "-.5em")
+                    .attr("x", treeOptions.boxWidth / 2)
+                    .attr("y", "-.5em")
                     .text("*")
                     .style("opacity", function(d) {
                         return d.marked ? 1 : 0;

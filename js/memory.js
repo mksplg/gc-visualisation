@@ -182,8 +182,8 @@ function updateMemArea(data, layoutData, clazz) {
 		    g.append("svg:text")
 		    	.attr("class", "marked-text")
 				.attr("text-anchor", "middle")
-	 			.attr("dx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2 - layoutData.boxHeight + 4)
-	 			.attr("dy", ".5em")
+	 			.attr("x", layoutData.boxWidth / 2 - layoutData.boxHeight / 2 - layoutData.boxHeight + 4)
+	 			.attr("y", ".5em")
 	 			.text("*")
 	 			.style("opacity", function(d) {
 					return d.treeObject.marked ? 1 : 0;
@@ -198,8 +198,8 @@ function updateMemArea(data, layoutData, clazz) {
 		    g.append("svg:text")
 		    	.attr("class", "count-text")
 				.attr("text-anchor", "middle")
-	 			.attr("dx", layoutData.boxWidth / 2 - layoutData.boxHeight / 2)
-	 			.attr("dy", ".35em");
+	 			.attr("x", layoutData.boxWidth / 2 - layoutData.boxHeight / 2)
+	 			.attr("y", ".35em");
 	});
 
     // Remove

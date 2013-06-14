@@ -21,7 +21,7 @@ function tenureGC_mark() {
 	clearMarked(memory.survivor2);
 	clearMarked(memory.old);
 	
-	mark(treeData, true);
+	mark(treeData, true, false);
 }
 
 function clearMarked(data) {
@@ -30,7 +30,7 @@ function clearMarked(data) {
 	}
 }
 
-function mark(parent, root) {
+function mark(parent, root, major) {
 	if (!parent) return;
 
 	if (!parent.deleted) {
@@ -50,8 +50,13 @@ function mark(parent, root) {
 
 	if (root) {
 		gcData.markTimeout += gcOptions.timeout;
+
 		setTimeout(function() {
 			tenureGC_copyEden();
+			if(major){ 
+				tenureGC_clearOld();
+			}
+			
 		}, gcData.markTimeout);
 	}
 }
@@ -66,6 +71,17 @@ function tenureGC_clearEden() {
 	clear(memory.eden);
 	updateGraphs();
 	setTimeout(function() {tenureGC_copySurvivor()}, gcOptions.timeout);
+}
+
+function tenureGC_clearOld() {
+	removeDeleted(treeData);
+	for (var i = 0; i < memory.old.length; i++) {
+    	if (!memory.old[i].treeObject.marked) {
+			memory.old.splice(i, 1);
+			i--;
+		}
+	}
+	updateGraphs();
 }
 
 function tenureGC_copySurvivor() {
@@ -111,14 +127,16 @@ function removeDeleted(parent) {
 }
 
 function fullGC() {
-	// timeoutData.value = 0;
-
-	// mark(treeData, memory);
+	gcData.markTimeout = 0;
+	gcData.copyTimeout = 0;
 	
-	// copy(memory.old, memory.tmp, memory.trash, 0);
-	// clear(memory.old);
-	// clear(memory.trash);
-	// memory.old = memory.tmp;
+	clearMarked(memory.eden);
+	clearMarked(memory.survivor1);
+	clearMarked(memory.survivor2);
+	clearMarked(memory.old);
+
+	mark(treeData, true, true);
+	updateGraphs();
 }
 
 function copy(source, target, old, count, continueFn) {

@@ -64,21 +64,18 @@ path.link {
 .eden-area {
     fill: none;
     stroke: #c44440;
-   /* stroke: #ffffff;*/
     stroke-width: 1px;
 }
 
 .survivor-area {
     fill: none;
     stroke: #1d72aa;
-    /*stroke: #888888;*/
     stroke-width: 1px;
 }
 
 .old-area {
     fill: none;
     stroke: #8cbb4e;
-    /*stroke: #000000;*/
     stroke-width: 1px;
 }
 	
@@ -153,7 +150,6 @@ input[type="submit"]:focus:hover {
 .gallery {
 	margin: 20px;
 	font: small Verdana, sans-serif;
-  /*border: 2px solid #8cbb4e;*/
   overflow: hidden;
   padding: 10px;
 }

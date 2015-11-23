@@ -1,9 +1,9 @@
 body {
   background-color: #494949;
+  font-family: 'Droid Sans', sans-serif;
 }
 
 g.node {
-    font-family: Verdana, Helvetica; 
     font-size: 20px;
     font-weight: bold;
     fill: #232323;
@@ -171,19 +171,16 @@ input[type="submit"]:focus:hover {
 }
 
 .login a {
-	font-family:arial;
 	color:black;
 	font-size:16px;
 }
 
 #text {
-	font-family:arial;
 	color:black;
 	font-size:16px;
 }
 
 div.heading{
-	font-family:Verdana, Helvetica;
 	color:black;
 	font-size:32px;
 	align:center
@@ -232,7 +229,6 @@ div.desc {
 }
 
 .eden-node, .survivor1-node, .survivor2-node, .old-node {
-    font-family: Verdana, Helvetica; 
     font-size: 14px;
     font-weight: bold;
     fill: #232323;
@@ -244,7 +240,6 @@ div.desc {
     stroke-width: 1px;
 }
 .marked-text, .platform-marked-text {
-    font-family: Verdana, Helvetica; 
     font-size: 20px;
     font-weight: bold;
     fill: #FFFFFF;
